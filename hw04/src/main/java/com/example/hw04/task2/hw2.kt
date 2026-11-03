@@ -1,20 +1,24 @@
 package com.example.hw04.task2
-fun main() {
-    val cart = mutableListOf("Laptop", "Mouse")
 
-    // 1. Add "keyboard" and "Headset"
-    cart.add("Keyboard")
-    cart.add("Headset")
+enum class SubmissionStatus(val label: String){
+    NOT_SUBMITTED("Not sumbitted yet"),
+    SUBMITTED("Waiting for grading"),
+    LATE("A late penalty may apply"),
+    GRADED("Check your score in the portal")
+}
 
-    // 2. Remove "Mouse"
-    cart.remove("Mouse")
-
-    // 3. Print every product using a loop
-    println("Products in cart:")
-    for (item in cart) {
-        println("- $item")
+fun printStatusInfo(status: SubmissionStatus){
+    val message = when (status){
+        SubmissionStatus.SUBMITTED -> println("Waiting for grading.")
+        SubmissionStatus.LATE -> println("A late penalty may apply.")
+        SubmissionStatus.GRADED -> println("Check your score in the portal.")
+        else -> println("Please submit before the deadline.")
     }
+    println("${status.name}: ${status.label} -> $message")
+}
 
-    // 4. Print the number of products
-    println("Total products: ${cart.size}")
+fun main(){
+    for(status in SubmissionStatus.entries){
+        printStatusInfo(status)
+    }
 }

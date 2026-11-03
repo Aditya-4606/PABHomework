@@ -1,16 +1,20 @@
 package com.example.hw04.task1
-data class Product(
-    val name: String,
-    val price: Int
+
+data class Book(
+    val isbn: String,
+    val title: String,
+    val year: Int
 )
-fun Product.isExpensive(): Boolean = price > 500000
-fun main() {
-    val product1 = Product("Mouse", 150000)
-    val product2 = Product("Laptop", 7500000)
-    println(product1)
-    println(product2)
-    val discountedLaptop = product2.copy(price = 4500000)
-    println(discountedLaptop)
-    println("${product1.name} is expensive? ${product1.isExpensive()}")
-    println("${product2.name} is expensive? ${product2.isExpensive()}")
+
+fun main(){
+    val book1 = Book("978-0134494166","Kotlin in Action", 2024)
+    val book2 = Book("978-1119543046","Android Basics", 2023)
+
+    println(book1)
+    println(book2)
+
+    val book3 = book1.copy(year = 2026)
+    println(book3)
+
+    println(book1==book2)
 }

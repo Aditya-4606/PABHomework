@@ -1,26 +1,29 @@
 package com.example.hw04.task3
-enum class CourseStatus { ACTIVE, COMPLETED }
-data class Course(
-    val code: String,
-    val name: String,
-    val status: CourseStatus)
-fun Course.displayInfo(): String = "$code - $name - $status"
 
-fun main() {
-    val courses = mutableListOf(
-        Course("PAB101", "Mobile App Development", CourseStatus.ACTIVE),
-        Course("WEB202", "Web Programming", CourseStatus.COMPLETED)
-    )
+fun String.wordCount(): Int{
+    if (this.isBlank()) return 0
+    return this.trim().split("\\s+".toRegex()).size
+}
+fun Int.toRupiahString(): String{
+    val formatted = this.toString()
+        .reversed()
+        .chunked(3)
+        .joinToString(".")
+        .reversed()
+    return "Rp $formatted"
+}
+fun List<Int>.clampedAverage(min: Int, max: Int): Double{
+    val filter = this.filter { it in min..max }
+    if (filter.isEmpty()) return 0.0
+    return filter.average()
+}
+fun main(){
+    val sentence1 = ""
+    println("\"$sentence1\" -> ${sentence1.wordCount()} words")
 
-    courses.add(Course("PG404", "Game Development", CourseStatus.ACTIVE))
-    courses.removeAt(1)
+    println(1000.toRupiahString())
 
-    println("Remaining Courses:")
-    for (course in courses) {
-        println(course.displayInfo())
-    }
-
-    val sampleCourse = courses[0]
-    val (code, name, status) = sampleCourse
-    println("\nDestructured Course -> Code: $code, Name: $name, Status: $status")
+    val numbers = listOf(10, 50, 200, 85, -5)
+    val avg = numbers.clampedAverage(0, 100)
+    println("listOf(10, 50, 200, 85, -5).clampedAverage(0, 100) = $avg")
 }
